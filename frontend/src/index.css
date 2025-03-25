@@ -1,0 +1,31 @@
+/* index.css */
+
+/* Reset some default styling */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  height: 100%;
+}
+
+body {
+  font-family: 'Roboto', sans-serif;
+  background-color: #ffffff;
+  color: #333;
+}
+
+a {
+  text-decoration: none;
+}
+
+ul, ol {
+  list-style-type: none;
+}
+
+/* Global container padding */
+.container {
+  padding: 20px;
+}
