@@ -1,0 +1,161 @@
+/* Full-page background and layout */
+.category-page {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: flex-start;
+    height: auto; /* Ensure the layout grows with content */
+    padding: 20px 10px; /* Reduced padding */
+    background: linear-gradient(to right, #e9f7fb, #d7c784); /* Soft pastel gradient */
+    font-family: 'Poppins', sans-serif;
+    box-sizing: border-box;
+    overflow: hidden;
+}
+
+/* Category Card Grid Layout */
+.category-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(400px, 1fr)); /* Reduced card size */
+    gap: 190px; /* Smaller gap between cards */
+    width: 100%;
+    max-width: 1200px; /* Reduced max width */
+    margin: 0 auto;
+}
+
+/* Category Card Styling */
+.category-card {
+    position: relative;
+    background: linear-gradient(to top left, #e0f7fa, #ac9168); /* Light pastel blue and yellow gradient */
+    border-radius: 15px; /* Slightly smaller border-radius */
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1); /* Reduced shadow */
+    cursor: pointer;
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.5s ease;
+    height: 350px; /* Reduced height */
+    width: 100%;
+    max-width: 500px; /* Reduced width */
+    border: 5px solid transparent;
+    z-index: 1;
+}
+
+/* Hover Effect: Border Color Change, Slight Zoom, and Color Change */
+.category-card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.2);
+    background: linear-gradient(to top left, #d1f7e4, #f3e0fb); /* Light pastel green and pink on hover */
+    border: 5px solid #ffcc00; /* Light yellow border */
+}
+
+/* Category Image Styling */
+.category-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: brightness(90%);
+    transition: transform 0.5s ease-in-out;
+}
+
+/* On hover, zoom the image slightly */
+.category-card:hover .category-image {
+    transform: scale(1.05);
+}
+
+/* Category Name Styling */
+.category-name {
+    position: absolute;
+    bottom: 15px; /* Reduced distance from bottom */
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 3rem; /* Smaller font size */
+    font-family: 'Poppins', sans-serif;
+    font-weight: bold;
+    text-shadow: 4px 4px 10px rgba(0, 0, 0, 0.3), 0 0 25px rgba(255, 255, 255, 0.6);
+    color: #f3f2f1; /* Vibrant coral red */
+    letter-spacing: 1.5px; /* Reduced letter spacing */
+    z-index: 10;
+    animation: categoryPop 1s ease-out;
+}
+
+/* Add animation for category name appearance */
+@keyframes categoryPop {
+    0% {
+        opacity: 0;
+        transform: translateX(-50%) scale(0.8);
+    }
+    100% {
+        opacity: 1;
+        transform: translateX(-50%) scale(1);
+    }
+}
+
+/* Arrow Styling */
+.arrow {
+    font-size: 1.2rem; /* Reduced arrow size */
+    color: #ffcc00;
+    margin-left: 8px;
+}
+
+/* Make text and layout responsive */
+@media (max-width: 768px) {
+    .category-card {
+        height: 400px; /* Reduced height for mobile */
+        width: 90%; /* Adjust width for mobile */
+    }
+
+    .category-name {
+        font-size: 2.5rem; /* Smaller text for mobile */
+    }
+}
+
+/* Adding Random Backgrounds */
+.category-card:nth-child(odd) {
+    background: linear-gradient(to top left, #d1f8e0, #eaf0fc); /* Soft pastel green to light blue gradient */
+}
+
+.category-card:nth-child(even) {
+    background: linear-gradient(to top left, #fbf5d1, #fce1f0); /* Light yellow to soft pink gradient */
+}
+
+/* Random Backgrounds for Additional Variety */
+.category-card:nth-child(3) {
+    background: linear-gradient(to top left, #e2f9f0, #f8e4d1); /* Light green to peach gradient */
+}
+
+.category-card:nth-child(4) {
+    background: linear-gradient(to top left, #fce3f3, #e0f7fb); /* Light pink to pale blue gradient */
+}
+
+.category-card:nth-child(5) {
+    background: linear-gradient(to top left, #f0eaf2, #d1f8e0); /* Lavender to green gradient */
+}
+
+.category-card:nth-child(6) {
+    background: linear-gradient(to top left, #fef0e4, #d9e8f1); /* Light cream to blue gradient */
+}
+
+.category-card:nth-child(7) {
+    background: linear-gradient(to top left, #f5f9d1, #e0f1fb); /* Yellow to blue gradient */
+}
+
+/* Subtle animations for background change on hover */
+.category-card:hover {
+    animation: backgroundChange 0.5s ease-in-out forwards;
+}
+
+/* Keyframes for background color change on hover */
+@keyframes backgroundChange {
+    from {
+        background: linear-gradient(to top left, #eaedee, #f1e4d1);
+    }
+    to {
+        background: linear-gradient(to top left, #d1f7e4, #f3e0fb);
+    }
+}
+
+.title {
+    color: #986b6b;
+    font-size: 3rem; /* Reduced font size */
+    font-family: 'Poppins', sans-serif;
+    text-align: center;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+}

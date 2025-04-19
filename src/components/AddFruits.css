@@ -1,0 +1,277 @@
+/* General Page Styling */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Roboto', sans-serif;
+    background: linear-gradient(to right, #a6c0fe, #f68084); /* Soft pastel gradient background */
+    color: #333;
+}
+
+/* Main Container */
+.container {
+    width: 90%;
+    max-width: 1200px;
+    margin: auto;
+    padding: 50px 0;
+    text-align: center;
+    background: rgba(255, 255, 255, 0.9); /* Slight transparent white background */
+    border-radius: 20px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+}
+
+/* Heading */
+h2 {
+    font-size: 76px;
+    color: #59b143;
+    margin-bottom: 30px;
+    font-weight: 700;
+    text-shadow: 3px 3px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Table Styling */
+table {
+    width: 40%;
+    max-width: 600px;
+    border-collapse: collapse;
+    margin-top: 30px;
+    background: linear-gradient(to top, #f9f9f9, #ffffff);
+    border-radius: 10px;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
+    font-size: 22px; /* Larger text size */
+}
+
+th, td {
+    padding: 25px;
+    text-align: center;
+    border: 1px solid #e3e3e3;
+    color: #000; /* Set text color to black */
+}
+
+/* Header Styling */
+th {
+    background-color: #ffb6b9; /* Light pastel pink */
+    color: #fff;
+    font-size: 24px;
+    text-transform: uppercase;
+}
+
+tr:nth-child(even) {
+    background-color: #f7e4e1; /* Light peach */
+}
+
+tr:nth-child(odd) {
+    background-color: #fef6f2; /* Off white */
+}
+
+tr:hover {
+    background-color: #ffe3e1; /* Light soft red when hovering */
+}
+
+/* Add Product Button */
+.add-button {
+    background-color: #f8b400;
+    color: #fff;
+    padding: 15px 25px;
+    border: none;
+    border-radius: 30px;
+    cursor: pointer;
+    font-size: 20px;
+    margin-top: 40px;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.add-button:hover {
+    background-color: #e89f00; /* Darker yellow on hover */
+    transform: scale(1.1);
+}
+
+/* Form Styling */
+form {
+    background: linear-gradient(to bottom, #ffecd2, #ffdde1); /* Soft gradient pastel background */
+    padding: 35px;
+    border-radius: 15px;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+    width: 70%; /* Larger form width */
+    margin: 40px auto;
+    font-size: 16px;
+}
+
+/* Form Heading */
+form h2 {
+    font-size: 60px;
+    margin-bottom: 20px;
+    color: #f56a79; /* Soft coral pink */
+    text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.1);
+}
+
+/* Label Styling */
+label {
+    display: block;
+    margin-top: 20px;
+    font-size: 18px;
+    color: #333;
+    font-weight: 600;
+}
+
+/* Input Fields Styling */
+input {
+    width: 100%;
+    padding: 15px;
+    margin-top: 10px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    font-size: 16px;
+    transition: all 0.3s ease;
+}
+
+input:focus {
+    border-color: #ffb6b9; /* Light pink border on focus */
+    box-shadow: 0 0 8px rgba(255, 182, 185, 0.5); /* Glowing effect */
+    outline: none;
+}
+
+/* Error Message Styling */
+.error {
+    color: #ff4d4d;
+    font-size: 14px;
+    margin-top: 5px;
+    text-align: left;
+}
+
+/* Submit Button Styling */
+button[type="submit"] {
+    background-color: #ffb6b9;
+    color: white;
+    padding: 15px 25px;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    font-size: 18px;
+    margin-top: 20px;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+button[type="submit"]:hover {
+    background-color: #f56a79; /* Soft coral on hover */
+    transform: scale(1.05);
+}
+
+button[type="submit"]:active {
+    background-color: #f32e5b; /* Darker coral on active */
+}
+button[type="btn"] {
+    background-color: #d33237;
+    color: white;
+    padding: 15px 25px;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    font-size: 18px;
+    margin-top: 20px;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+button[type="btn"]:hover {
+    background-color: #d33237; /* Soft coral on hover */
+    transform: scale(1.05);
+}
+
+button[type="btn"]:active {
+    background-color: #f32e5b; /* Darker coral on active */
+}
+button[type="btn1"] {
+    background-color: #2d9255;
+    color: white;
+    padding: 10px 25px;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    font-size: 18px;
+    margin-top: 20px;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+button[type="btn1"]:hover {
+    background-color: #2d9255; /* Soft coral on hover */
+    transform: scale(1.05);
+}
+
+button[type="btn1"]:active {
+    background-color: #f32e5b; /* Darker coral on active */
+}
+/* Responsive Design */
+@media (max-width: 768px) {
+    .container {
+        padding: 20px;
+    }
+
+    table {
+        font-size: 16px; /* Adjust font size for mobile */
+    }
+
+    form {
+        width: 800%;
+    }
+
+    .add-button {
+        width: 100%;
+    }
+    .update-button {
+    background-color: #4CAF50; /* Green */
+    color: rgb(98, 180, 111);
+    border: none;
+    padding: 8px 12px;
+    cursor: pointer;
+    margin-right: 5px;
+    border-radius: 5px;
+}
+
+.update-button:hover {
+    background-color: #45a049;
+}
+
+.delete-button {
+    background-color: #f44336; /* Red */
+    color: rgb(177, 26, 26);
+    border: none;
+    padding: 8px 12px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.delete-button:hover {
+    background-color: #d32f2f;
+}
+.analysis-button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 15px;
+    margin-left: 10px;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    border-radius: 5px;
+}
+
+.analysis-button:hover {
+    background-color: #45a049;
+}
+/* Styling the Select Dropdown */
+form select {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+    background-color: #fff;
+    color: #333;
+}
+
+/* Style for option elements */
+form select option {
+    padding: 10px;
+    font-size: 16px;
+}
+
+}

@@ -1,0 +1,65 @@
+/* Make the navbar full width */
+.navbar {
+  width: 100%;
+  height: 100px; /* Adjust the height as needed */
+  background: linear-gradient(165deg, #b53a1b, #e8bfa0);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 50px;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
+}
+
+/* Navbar brand */
+.navbar-brand {
+  font-size: 2.5rem;
+  font-weight: bold;
+  color: #42564b; /* Tomato color */
+}
+
+/* Navbar links */
+.nav-link {
+  font-size: 1.4rem;
+  color: #fff;
+  margin: 0 15px;
+  text-transform: uppercase;
+  font-weight: bold;
+}
+
+.nav-link:hover {
+  color: #007bff;
+}
+
+/* Navbar toggler for mobile */
+.navbar-toggler-icon {
+  background-color: #007bff;
+}
+
+/* Ensure container does not overlap with header */
+.container {
+  margin-top: 100px; /* Pushes content down so it doesn't overlap with header */
+  text-align: center;
+  width: 100%;
+  min-height: calc(100vh - 100px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(165deg, #b53a1b, #e8bfa0);
+  color: #e8bfa0;
+  padding: 20px;
+}
+
+/* Large heading */
+.title {
+  font-size: 90px;
+  font-weight: bold;
+  text-transform: uppercase;
+  margin-bottom: 40px;
+  text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+}
+.header-title {
+  font-size: 3rem;
+  font-weight: bold;
+  color: #242121; /* Change the color to whatever you'd like */
+}
