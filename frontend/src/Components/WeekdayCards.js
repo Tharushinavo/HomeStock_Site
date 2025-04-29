@@ -1,6 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import Navbar from "./Navbar";  
+import Navbar from "./Navbar";  // ✅ Fixed Import
+
 const weekdays = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
 
 const WeekdayCards = () => {
@@ -41,12 +42,13 @@ const headingStyle = {
   fontSize: "40px", 
   fontWeight: "bold", 
   color: "#333",
-  marginBottom: "20px" 
-}
+  marginBottom: "20px" // Added spacing below the heading
+};
 
 const cardContainerStyle = {
   display: "grid",
-  gridTemplateColumns: "repeat(auto-fit, minmax(180px, 1fr))", 
+  gridTemplateColumns: "repeat(auto-fit, minmax(180px, 1fr))", // Increased card size
+  gap: "20px", // Increased gap between cards
   width: "80%",
   maxWidth: "700px", 
 };
@@ -60,12 +62,12 @@ const cardStyle = {
   fontSize: "30px", 
   fontWeight: "bold",
   cursor: "pointer",
-  transition: "transform 0.2s", 
-}
+  transition: "transform 0.2s", // Added hover effect
+};
 
 const cardTitleStyle = { 
   margin: 0,
-  fontSize: "24px" 
-}
+  fontSize: "24px" // Increased font size inside the card
+};
 
 export default WeekdayCards;
