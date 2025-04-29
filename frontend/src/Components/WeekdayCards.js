@@ -1,7 +1,6 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import Navbar from "./Navbar";  // ✅ Fixed Import
-
+import Navbar from "./Navbar";  
 const weekdays = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
 
 const WeekdayCards = () => {
@@ -26,7 +25,7 @@ const WeekdayCards = () => {
   );
 };
 
-// Updated styles
+
 const containerStyle = {
   display: "flex",
   flexDirection: "column",
@@ -39,35 +38,34 @@ const containerStyle = {
 
 const headingStyle = { 
   textAlign: "center", 
-  fontSize: "40px", // Increased size
+  fontSize: "40px", 
   fontWeight: "bold", 
   color: "#333",
-  marginBottom: "20px" // Added spacing below the heading
-};
+  marginBottom: "20px" 
+}
 
 const cardContainerStyle = {
   display: "grid",
-  gridTemplateColumns: "repeat(auto-fit, minmax(180px, 1fr))", // Increased card size
-  gap: "20px", // Increased gap between cards
+  gridTemplateColumns: "repeat(auto-fit, minmax(180px, 1fr))", 
   width: "80%",
-  maxWidth: "700px", // Increased max width
+  maxWidth: "700px", 
 };
 
 const cardStyle = {
-  padding: "30px", // Increased padding
+  padding: "30px", 
   background: "#f0cd79",
   color: "white",
-  borderRadius: "15px", // Increased border radius for a smoother look
+  borderRadius: "15px", 
   textAlign: "center",
-  fontSize: "30px", // Increased font size
+  fontSize: "30px", 
   fontWeight: "bold",
   cursor: "pointer",
-  transition: "transform 0.2s", // Added hover effect
-};
+  transition: "transform 0.2s", 
+}
 
 const cardTitleStyle = { 
   margin: 0,
-  fontSize: "24px" // Increased font size inside the card
-};
+  fontSize: "24px" 
+}
 
 export default WeekdayCards;
