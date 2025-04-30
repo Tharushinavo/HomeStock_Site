@@ -1,0 +1,53 @@
+nav {
+  background: rgba(255, 255, 255, 0.2); /* Soft glass effect */
+  padding: 12px 30px; /* Adjusted padding */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 60px; /* Taller navbar */
+  border-radius: 14px; /* Slightly rounded edges */
+  backdrop-filter: blur(12px); /* Soft blur effect */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15); /* Soft shadow */
+  margin: 20px auto;
+  width: 100%; /* Increased width */
+}
+
+.Grocerylist-ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px; /* Balanced spacing */
+}
+
+.Grocerylist-ll {
+  margin: 0;
+}
+
+.home-a {
+  text-decoration: none;
+  color: #4a4a4a; /* Soft dark color */
+  font-size: 16px;
+  font-weight: bold;
+  background: linear-gradient(to right, #fbc2eb, #a6c1ee); /* Gradient effect */
+  padding: 12px 18px; /* Increased padding */
+  border-radius: 8px;
+  transition: all 0.3s ease-in-out;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.home-a:hover {
+  background: linear-gradient(to right, #ff9a9e, #fad0c4);
+  color: white;
+  transform: scale(1.1);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+
+
+  
