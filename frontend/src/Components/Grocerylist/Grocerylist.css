@@ -165,7 +165,7 @@ button {
   font-weight: bold;
 }
 
-/* Smooth fade-in effect */
+
 @keyframes fadeIn {
   0% {
     opacity: 0;
