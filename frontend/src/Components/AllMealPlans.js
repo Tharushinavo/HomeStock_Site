@@ -3,6 +3,13 @@ import axios from "axios";
 import Navbar from "./Navbar";
 import { jsPDF } from "jspdf";
 
+const mealIcons = {
+  breakfast: "fas fa-coffee",
+  snacks: "fas fa-apple-alt",
+  lunch: "fas fa-utensils",
+  dinner: "fas fa-drumstick-bite"
+};
+
 const AllMealPlans = () => {
   const [mealPlans, setMealPlans] = useState([]);
   const [editingId, setEditingId] = useState(null);
@@ -45,7 +52,7 @@ const AllMealPlans = () => {
     setEditingId(plan._id);
     setEditMeals((prev) => ({
       ...prev,
-      [plan._id]: { ...plan.meals }, // Pre-populate with existing meals
+      [plan._id]: { ...plan.meals },
     }));
   };
 
@@ -54,7 +61,7 @@ const AllMealPlans = () => {
       const updatedMeals = { 
         ...mealPlans.find((plan) => plan._id === id).meals, 
         ...editMeals[id] 
-      }; // Merge existing meals with new edits
+      };
 
       await axios.put(`http://localhost:5000/meals/${id}`, { meals: updatedMeals });
 
@@ -73,44 +80,76 @@ const AllMealPlans = () => {
     }
   };
 
+  // -------- PDF TEMPLATE MODIFIED BELOW -----------
   const generatePDF = () => {
     const doc = new jsPDF();
-    doc.setFontSize(16);
-    doc.text("All Meal Plans", 10, 10);
+    doc.setFontSize(22);
+    doc.text("Weekly Meal Plans", 105, 18, { align: "center" });
+    doc.setFontSize(12);
+    let yPosition = 30;
 
-    let yPosition = 20;
     mealPlans.forEach((plan, index) => {
-      if (yPosition > 270) {
+      if (yPosition > 260) {
         doc.addPage();
         yPosition = 20;
       }
-      doc.setFontSize(14);
-      doc.text(`${plan.day}`, 10, yPosition);
+      // Day Title
+      doc.setFontSize(15);
+      doc.setFont("helvetica", "bold");
+      doc.text(`${plan.day}`, 14, yPosition);
+      yPosition += 8;
+
+      // Meals
       doc.setFontSize(12);
-      yPosition += 10;
-      Object.entries(plan.meals).forEach(([mealType, meal]) => {
-        doc.text(`${mealType.charAt(0).toUpperCase() + mealType.slice(1)}: ${meal}`, 10, yPosition);
-        yPosition += 10;
+      doc.setFont("helvetica", "normal");
+      ["breakfast", "snacks", "lunch", "dinner"].forEach((mealType) => {
+        const meal = plan.meals[mealType] || "";
+        doc.text(
+          `${mealType.charAt(0).toUpperCase() + mealType.slice(1)}: `,
+          18,
+          yPosition
+        );
+        doc.text(`${meal}`, 50, yPosition);
+        yPosition += 7;
       });
+
+      // Divider
+      yPosition += 2;
+      doc.setDrawColor(200, 200, 200);
+      doc.line(14, yPosition, 196, yPosition);
       yPosition += 10;
     });
 
     doc.save("MealPlans.pdf");
   };
+  // -------- END PDF TEMPLATE MODIFIED -----------
 
   return (
     <div style={pageContainer}>
+      <div style={overlayStyle}></div>
       <Navbar />
       <div style={contentContainer}>
-        <h1 style={headingStyle}>All Meal Plans</h1>
-        <button onClick={generatePDF} style={pdfButtonStyle}>Download PDF</button>
+        <h1 style={headingStyle}>
+          <i className="fas fa-utensils" style={{ marginRight: "15px" }}></i>
+          All Meal Plans
+        </h1>
+        <button onClick={generatePDF} style={pdfButtonStyle}>
+          <i className="fas fa-file-download" style={{ marginRight: "8px" }}></i>
+          Download PDF
+        </button>
         <div style={gridStyle}>
           {mealPlans.map((plan) => (
             <div key={plan._id} style={cardStyle}>
-              <h2>{plan.day}</h2>
+              <h2 style={dayHeaderStyle}>
+                <i className="fas fa-calendar-day" style={{ marginRight: "10px", color: "#f39c12" }}></i>
+                {plan.day}
+              </h2>
               {["breakfast", "snacks", "lunch", "dinner"].map((mealType) => (
-                <div key={mealType}>
-                  <strong>{mealType.charAt(0).toUpperCase() + mealType.slice(1)}:</strong>
+                <div key={mealType} style={mealItemStyle}>
+                  <div style={mealHeaderStyle}>
+                    <i className={mealIcons[mealType]} style={{ marginRight: "8px", color: "#e67e22" }}></i>
+                    <strong>{mealType.charAt(0).toUpperCase() + mealType.slice(1)}:</strong>
+                  </div>
                   {editingId === plan._id ? (
                     <input
                       type="text"
@@ -119,19 +158,29 @@ const AllMealPlans = () => {
                       style={inputStyle}
                     />
                   ) : (
-                    <p>{plan.meals[mealType]}</p>
+                    <p style={mealTextStyle}>{plan.meals[mealType]}</p>
                   )}
                 </div>
               ))}
-              {editingId === plan._id ? (
-                <div>
-                  <button onClick={() => saveMealPlan(plan._id)} style={saveButtonStyle}>Save</button>
-                  <button onClick={() => setEditingId(null)} style={cancelButtonStyle}>Cancel</button>
-                </div>
-              ) : (
-                <button onClick={() => startEditing(plan)} style={editButtonStyle}>Edit</button>
-              )}
-              <button onClick={() => deleteMealPlan(plan._id)} style={deleteButtonStyle}>Delete</button>
+              <div style={buttonContainerStyle}>
+                {editingId === plan._id ? (
+                  <>
+                    <button onClick={() => saveMealPlan(plan._id)} style={saveButtonStyle}>
+                      <i className="fas fa-check"></i> Save
+                    </button>
+                    <button onClick={() => setEditingId(null)} style={cancelButtonStyle}>
+                      <i className="fas fa-times"></i> Cancel
+                    </button>
+                  </>
+                ) : (
+                  <button onClick={() => startEditing(plan)} style={editButtonStyle}>
+                    <i className="fas fa-edit"></i> Edit
+                  </button>
+                )}
+                <button onClick={() => deleteMealPlan(plan._id)} style={deleteButtonStyle}>
+                  <i className="fas fa-trash-alt"></i> Delete
+                </button>
+              </div>
             </div>
           ))}
         </div>
@@ -140,17 +189,147 @@ const AllMealPlans = () => {
   );
 };
 
-// Styles
-const pageContainer = { display: "flex" };
-const contentContainer = { marginLeft: "220px", padding: "20px", flexGrow: 1 };
-const headingStyle = { fontSize: "2rem", color: "#333" };
-const gridStyle = { display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(250px, 1fr))", gap: "15px", marginTop: "20px" };
-const cardStyle = { padding: "15px", background: "#f7f7f7", borderRadius: "10px", boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)" };
-const inputStyle = { marginBottom: "10px", padding: "8px", width: "30%", fontSize: "1rem", borderRadius: "5px" };
-const editButtonStyle = { backgroundColor: "#4CAF50", color: "white", border: "none", padding: "8px 16px", borderRadius: "5px", cursor: "pointer", marginRight: "10px" };
-const deleteButtonStyle = { backgroundColor: "red", color: "white", border: "none", padding: "8px 16px", borderRadius: "5px", cursor: "pointer" };
-const saveButtonStyle = { backgroundColor: "#4CAF50", color: "white", border: "none", padding: "8px 16px", borderRadius: "5px", cursor: "pointer" };
-const pdfButtonStyle = { backgroundColor: "#686dc2", color: "white", border: "none", padding: "10px 16px", borderRadius: "5px", cursor: "pointer", marginBottom: "10px" };
-const cancelButtonStyle = { backgroundColor: "#f44336", color: "white", border: "none", padding: "8px 16px", borderRadius: "5px", cursor: "pointer", marginLeft: "10px" };
+// Styles (unchanged)
+const pageContainer = { 
+  display: "flex",
+  minHeight: "100vh",
+  backgroundImage: "url('https://images.unsplash.com/photo-1498837167922-ddd27525d352?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80')",
+  backgroundSize: "cover",
+  backgroundPosition: "center",
+  backgroundAttachment: "fixed",
+  position: "relative"
+};
+
+const overlayStyle = {
+  position: "absolute",
+  top: 0,
+  left: 0,
+  right: 0,
+  bottom: 0,
+  backgroundColor: "rgba(0,0,0,0.65)",
+  zIndex: 1
+};
+
+const contentContainer = { 
+  marginLeft: "220px", 
+  padding: "30px", 
+  flexGrow: 1,
+  position: "relative",
+  zIndex: 2
+};
+
+const headingStyle = { 
+  fontSize: "2.5rem",
+  color: "#fff",
+  fontFamily: "'Montserrat', sans-serif",
+  textShadow: "2px 2px 4px rgba(0,0,0,0.5)",
+  marginBottom: "30px"
+};
+
+const gridStyle = { 
+  display: "grid", 
+  gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))", 
+  gap: "25px", 
+  marginTop: "20px" 
+};
+
+const cardStyle = { 
+  padding: "25px",
+  background: "rgba(255, 255, 255, 0.95)",
+  borderRadius: "15px",
+  boxShadow: "0 8px 32px rgba(0, 0, 0, 0.12)",
+  backdropFilter: "blur(10px)",
+  transition: "transform 0.3s ease, box-shadow 0.3s",
+  fontFamily: "'Montserrat', sans-serif"
+};
+
+const dayHeaderStyle = {
+  color: "#2c3e50",
+  fontFamily: "'Montserrat', sans-serif",
+  borderBottom: "2px solid #eee",
+  paddingBottom: "12px",
+  marginBottom: "20px",
+  fontSize: "1.3rem"
+};
+
+const mealItemStyle = {
+  marginBottom: "18px"
+};
+
+const mealHeaderStyle = {
+  display: "flex",
+  alignItems: "center",
+  color: "#e67e22",
+  marginBottom: "8px"
+};
+
+const mealTextStyle = {
+  color: "#34495e",
+  margin: 0,
+  fontSize: "1rem",
+  lineHeight: 1.5
+};
+
+const inputStyle = { 
+  width: "100%",
+  padding: "10px",
+  border: "1px solid #ddd",
+  borderRadius: "8px",
+  fontSize: "1rem",
+  marginTop: "5px"
+};
+
+const buttonContainerStyle = {
+  marginTop: "20px",
+  display: "flex",
+  gap: "10px",
+  flexWrap: "wrap"
+};
+
+const baseButtonStyle = {
+  border: "none",
+  padding: "10px 20px",
+  borderRadius: "8px",
+  cursor: "pointer",
+  display: "flex",
+  alignItems: "center",
+  gap: "8px",
+  fontFamily: "'Montserrat', sans-serif",
+  fontWeight: 600,
+  fontSize: "1rem",
+  boxShadow: "0 2px 6px rgba(0,0,0,0.09)",
+  transition: "background 0.2s"
+};
+
+const editButtonStyle = { 
+  ...baseButtonStyle,
+  backgroundColor: "#3498db",
+  color: "white"
+};
+
+const deleteButtonStyle = { 
+  ...baseButtonStyle,
+  backgroundColor: "#e74c3c",
+  color: "white"
+};
+
+const saveButtonStyle = { 
+  ...baseButtonStyle,
+  backgroundColor: "#2ecc71",
+  color: "white"
+};
+
+const cancelButtonStyle = { 
+  ...baseButtonStyle,
+  backgroundColor: "#95a5a6",
+  color: "white"
+};
+
+const pdfButtonStyle = { 
+  ...baseButtonStyle,
+  backgroundColor: "#9b59b6",
+  color: "white",
+  marginBottom: "16px"
+};
 
 export default AllMealPlans;

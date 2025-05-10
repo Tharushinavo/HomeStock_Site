@@ -7,30 +7,56 @@ const Navbar = () => {
       <ul style={navListStyle}>
         <li style={navItemStyle}>
           <Link to="/" style={navLinkStyle}>
-            <div style={navBoxStyle}>Meal Planner</div>
+            <div className="nav-box">Meal Planner</div>
           </Link>
         </li>
         <li style={navItemStyle}>
           <Link to="/all-meal-plans" style={navLinkStyle}>
-            <div style={navBoxStyle}>All Meal Plans</div>
+            <div className="nav-box">All Meal Plans</div>
           </Link>
         </li>
       </ul>
+
+      {/* Injecting global styles for hover effects */}
+      <style>{`
+        .nav-box {
+          background: rgba(255, 255, 255, 0.15);
+          color: #fff;
+          font-size: 18px;
+          font-weight: 600;
+          padding: 15px;
+          border-radius: 12px;
+          width: 80%;
+          text-align: center;
+          transition: all 0.3s ease;
+          backdrop-filter: blur(10px);
+          box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
+          cursor: pointer;
+        }
+
+        .nav-box:hover {
+          background: rgba(255, 255, 255, 0.25);
+          transform: scale(1.05);
+        }
+      `}</style>
     </nav>
   );
 };
 
-// Updated styles for box-like navigation items
+// Sidebar nav styling
 const navStyle = {
   position: "fixed",
   left: 0,
   top: 0,
   height: "100vh",
   width: "220px",
-  background: "#333",
+  background: "rgba(0, 0, 0, 0.4)",
+  backdropFilter: "blur(12px)",
   display: "flex",
   alignItems: "center",
   justifyContent: "center",
+  boxShadow: "4px 0 10px rgba(0, 0, 0, 0.3)",
+  zIndex: 1000,
 };
 
 const navListStyle = {
@@ -54,26 +80,6 @@ const navLinkStyle = {
   width: "100%",
   display: "flex",
   justifyContent: "center",
-};
-
-const navBoxStyle = {
-  background: "#444",
-  color: "white",
-  fontSize: "20px",
-  fontWeight: "bold",
-  padding: "15px",
-  borderRadius: "10px",
-  width: "80%", // Makes the box fit well inside the navbar
-  textAlign: "center",
-  transition: "0.3s",
-  boxShadow: "0px 4px 6px rgba(0, 0, 0, 0.2)",
-  cursor: "pointer",
-};
-
-// Hover effect for a better UI feel
-navBoxStyle[":hover"] = {
-  background: "#555",
-  transform: "scale(1.05)",
 };
 
 export default Navbar;
